@@ -30,8 +30,8 @@ import ToolbarButton from '../common/ToolbarButton';
 import DefaultLayout from './DefaultLayout';
 
 import Home from '../pages/Home.mdx';
-import Assignments from '../pages/Assignments.mdx';
-import Calendar from '../pages/Calendar.mdx';
+import Assignments from '../pages/Link1.mdx';
+import Calendar from '../pages/Link2.mdx';
 
 import { AppStore, createAppStore } from "../stores/AppStore";
 import { AppStoreProvider } from '../stores/AppStoreProvider';
@@ -52,10 +52,10 @@ const createUi = () => {
                                 <Container>
                                     <Toolbar disableGutters>
                                         <Box display="flex" flexDirection="row" width="100%">
-                                            <ToolbarButton to="/">CSE 510 - Advanced Topics in HCI - Winter 2020</ToolbarButton>
+                                            <ToolbarButton to="/">App Access Browser</ToolbarButton>
                                             <Box flexGrow={1} />
-                                            <ToolbarButton to="/assignments">Assignments</ToolbarButton>
-                                            <ToolbarButton to="/calendar">Calendar</ToolbarButton>
+                                            <ToolbarButton to="/link1">Link 1</ToolbarButton>
+                                            <ToolbarButton to="/link2">Link 2</ToolbarButton>
                                         </Box>
                                     </Toolbar>
                                 </Container>
@@ -67,10 +67,10 @@ const createUi = () => {
                                         <Route exact path="/">
                                             <Home />
                                         </Route>
-                                        <Route path="/assignments">
+                                        <Route path="/link1">
                                             <Assignments />
                                         </Route>
-                                        <Route path="/calendar">
+                                        <Route path="/link2">
                                             <Calendar />
                                         </Route>
                                     </Switch>
