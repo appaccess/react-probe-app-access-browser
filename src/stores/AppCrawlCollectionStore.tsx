@@ -4,7 +4,6 @@ export interface AppCrawlCollectionStore {
     crawls: AppCrawlStore[];
     appName: string;
     dateRange: string[]; // dateRange should be an array of datePaths of form 'YYYY.MM'
-
 }
 
 export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
@@ -22,24 +21,20 @@ export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
         }
     }
 }
-/*
+
 let INSTANCE: AppCrawlCollectionStore | null = null;
 
 export function createAppCrawlCollectionStore(appName: string, dateRange: string[]) : AppCrawlCollectionStore {
-    //if (INSTANCE) {
-    //    throw new Error('There can only be one AppCrawlCollectionStore.');
-    //}
-    
-   INSTANCE = new AppCrawlCollectionStoreImpl(appName, dateRange);
-
-   return getAppCrawlCollectionStore();
+    if (INSTANCE) {
+        throw new Error('There can only be one AppCrawlCollectionStore.');
+    }
+    INSTANCE = new AppCrawlCollectionStoreImpl(appName, dateRange);
+    return getAppCrawlCollectionStore();
 }
 
 export function getAppCrawlCollectionStore() {
     if (INSTANCE === null) {
-        throw new Error('AppCrawlCollectionStore not created';)
+        throw new Error('AppCrawlCollectionStore not created');
     }
-
     return INSTANCE;
 }
-*/

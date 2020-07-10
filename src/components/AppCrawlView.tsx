@@ -1,6 +1,8 @@
 import * as React from 'react';
+
 import { AppCrawlStore } from '../stores/AppCrawlStore';
 import { ScreenCaptureStore } from '../stores/ScreenCaptureStore';
+
 import { ScreenCaptureView } from './ScreenCaptureView';
 
 interface IProps {
