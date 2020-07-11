@@ -12,7 +12,7 @@ export class ScreenCaptureStore  {
     }
 
 
-    // INCORRECT
+    // THIS METHOD IS NONFUNCTIONAL
     getJSON(path: string) {
         // TODO: figure out how to parse JSON to create instance of interface
         let viewPath = JSON.stringify(require(path));
