@@ -1,75 +1,53 @@
 import * as React from 'react';
+import { FunctionComponent, useState } from 'react';
 import { AppCrawlStore } from '../stores/AppCrawlStore';
 import { ScreenCaptureStore } from '../stores/ScreenCaptureStore';
 import { ScreenCaptureView } from './ScreenCaptureView';
 
-interface IProps {
+interface AppCrawlViewProps {
     appCrawl: AppCrawlStore;
 }
 
-interface IState {
-    onIndex: number;
-    screens: ScreenCaptureStore[];
-}
+export const AppCrawlView: FunctionComponent<AppCrawlViewProps> = (props) => {
+    const [onIndex, setIndex] = useState(0);
+    const screens: ScreenCaptureStore[] = props.appCrawl.screenCaptures; //CHANGE
 
-export class AppCrawlView extends React.Component<IProps, IState> {
-    constructor(props: any) {
-        super(props);
-
-        this.state = {
-            onIndex: 0,
-            screens: this.props.appCrawl.screenCaptures,
-        }
-
-        this.onClickBack = this.onClickBack.bind(this);
-        this.onClickForward = this.onClickForward.bind(this);
-    }
-
-    onClickBack() {
-        if (this.state.onIndex === 0) {
-            this.setState({
-                onIndex: this.state.screens.length - 1,
-            })
+    const handleClickBack = () => {
+        if (onIndex === 0) {
+            setIndex(screens.length - 1);
         }
         else {
-            this.setState({
-                onIndex: this.state.onIndex - 1,
-            })
+            setIndex(onIndex - 1);
         }
     }
 
-    onClickForward() {
-        if (this.state.onIndex === this.state.screens.length - 1) {
-            this.setState({
-                onIndex: 0,
-            })
+    const handleClickForward = () => {
+        if (onIndex === screens.length - 1) {
+            setIndex(0);
         }
         else {
-            this.setState({
-                onIndex: this.state.onIndex + 1,
-            })
+            setIndex(onIndex + 1);
         }
     }
-
-    render() {
-        return (
-            <div>
+    
+    return (
+        <div>
                 <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                        <button onClick={this.onClickBack}>Back</button>
-                        <button onClick={this.onClickForward}>Forward</button>
-                    </div>
+                    <button onClick={handleClickBack}>Back</button>
+                    <button onClick={handleClickForward}>Forward</button>
+                </div>
 
-                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                        <p>Page {this.state.onIndex+1} of {this.state.screens.length}</p>
-                        <br />
-                    </div>
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                    <p>Page {onIndex+1} of {screens.length}</p>
+                    <br />
+                </div>
 
-                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                        <img src={this.state.screens[this.state.onIndex].imagePath} alt={(this.state.onIndex+1).toString()} width="300" />
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                    <img src={screens[onIndex].screenshot} alt={(onIndex+1).toString()} width="300" /> // screenshot may need to be changed after hardcoded testing
 
-                        <ScreenCaptureView screenCap={this.state.screens[this.state.onIndex]} />
-                    </div>
+                    <ScreenCaptureView screenCap={screens[onIndex]} />
+                </div>
             </div>
-        )
-    }
+    );
 }
+export default AppCrawlView;

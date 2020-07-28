@@ -1,1 +1,7 @@
+import { ScreenCaptureStore } from '../stores/ScreenCaptureStore';
+import { ScreenCaptureView } from '../components/ScreenCaptureView';
+import { AppCrawlStore } from '../stores/AppCrawlStore';
+import { AppCrawlView } from '../components/AppCrawlView';
+
 # Home
+<AppCrawlView appCrawl={new AppCrawlStore('2020.04')} />

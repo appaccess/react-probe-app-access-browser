@@ -1,24 +1,15 @@
 import * as React from 'react';
+import { FunctionComponent } from 'react';
 import { ScreenCaptureStore } from '../stores/ScreenCaptureStore';
 
-interface IProps {
-    screenCap: ScreenCaptureStore;
+interface ScreenCaptureViewProps {
+    screenCap: ScreenCaptureStore
 }
 
-interface IState {
-    
+export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (props) => {
+    return (
+        <img src={props.screenCap.screenshot}/> // < for hardcoded testing with imported screenshots //<img src={require(props.screenCap.imagePath)} />
+    );
+
 }
-
-export class ScreenCaptureView extends React.Component<IProps, IState> {
-    constructor(props: any) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <img src={this.props.screenCap.imagePath} />
-        )
-    }
-}
-
 export default ScreenCaptureView;

@@ -22,6 +22,8 @@ export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
         }
     }
 }
+
+export default AppCrawlCollectionStoreImpl;
 /*
 let INSTANCE: AppCrawlCollectionStore | null = null;
 
