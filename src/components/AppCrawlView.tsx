@@ -44,7 +44,6 @@ export const AppCrawlView: FunctionComponent<AppCrawlViewProps> = (props) => {
                 </div>
 
                 <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                    <img src={screens[onIndex].screenshot} alt={(onIndex+1).toString()} width="300" /> // screenshot may need to be changed after hardcoded testing
 
                     <ScreenCaptureView screenCap={screens[onIndex]} />
                 </div>

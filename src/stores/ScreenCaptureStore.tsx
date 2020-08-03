@@ -24,6 +24,12 @@ export class ScreenCaptureStore  {
 
         //return view;
     //}
+/*
+    getJSON(view: any) {
+        
+    }
+    */
 }
+
 
 export default ScreenCaptureStore;
