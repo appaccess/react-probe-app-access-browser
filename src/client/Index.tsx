@@ -54,7 +54,7 @@ const createUi = () => {
                                         <Box display="flex" flexDirection="row" width="100%">
                                             <ToolbarButton to="/">App Access Browser</ToolbarButton>
                                             <Box flexGrow={1} />
-                                            <ToolbarButton to="/link1">Link 1</ToolbarButton>
+                                            <ToolbarButton to="/link1">View Screens</ToolbarButton>
                                             <ToolbarButton to="/link2">Link 2</ToolbarButton>
                                         </Box>
                                     </Toolbar>
