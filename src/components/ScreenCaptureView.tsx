@@ -8,7 +8,7 @@ interface ScreenCaptureViewProps {
 
 export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (props) => {
     return (
-        <img src={props.screenCap.screenshot}/> // < for hardcoded testing with imported screenshots //<img src={require(props.screenCap.imagePath)} />
+        <img src={props.screenCap.screenshot} width={300} /> // < for hardcoded testing with imported screenshots //<img src={require(props.screenCap.imagePath)} />
     );
 
 }
