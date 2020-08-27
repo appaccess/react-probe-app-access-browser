@@ -23,21 +23,3 @@ export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
 }
 
 export default AppCrawlCollectionStoreImpl;
-/*
-let INSTANCE: AppCrawlCollectionStore | null = null;
-
-export function createAppCrawlCollectionStore(appName: string, dateRange: string[]) : AppCrawlCollectionStore {
-    if (INSTANCE) {
-        throw new Error('There can only be one AppCrawlCollectionStore.');
-    }
-    INSTANCE = new AppCrawlCollectionStoreImpl(appName, dateRange);
-    return getAppCrawlCollectionStore();
-}
-
-export function getAppCrawlCollectionStore() {
-    if (INSTANCE === null) {
-        throw new Error('AppCrawlCollectionStore not created');
-    }
-    return INSTANCE;
-}
-*/

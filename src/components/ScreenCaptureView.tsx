@@ -1,37 +1,79 @@
 import * as React from 'react';
 import { FunctionComponent, useState } from 'react';
 import { ScreenCaptureStore } from '../stores/ScreenCaptureStore';
+import { Screen } from '../types/Screen';
 
 interface ScreenCaptureViewProps {
-    screenCap: ScreenCaptureStore
+    screenCap: ScreenCaptureStore;
 }
 
 export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (props) => {
-    const [rectangleWidth, setWidth] = useState(280);
-    const [rectangleHeight, setHeight] = useState(150);
+    const [rectLeft, setRectLeft] = useState(0);
+    const [rectRight, setRectRight] = useState(0);
+    const [rectTop, setRectTop] = useState(0);
+    const [rectBottom, setRectBottom] = useState(0);
 
-    const [rectX, setRectX] = useState(0);
-    const [rectY, setRectY] = useState(0);
+    const [hasBeenClicked, setHasBeenClicked] = useState(false);
 
     const onMouseClick = (e: any) => {
+        setHasBeenClicked(true);
 
-        setRectX(e.nativeEvent.offsetX);
-        setRectY(e.nativeEvent.offsetY);
+        let x = e.nativeEvent.offsetX;
+        let y = e.nativeEvent.offsetY;
+        //let x = e.screenX;
+        //let y = e.screenY;
 
-        setWidth(280);
-        setHeight(150);
+        // TODO: look into json data to see if lowest element in hierarchy for the bound and set top, left, width, height accordingly (or top, bottom, left, right)
+        findChildInBound(props.screenCap.view, x, y);
 
     }
 
-    
+    const findChildInBound = (thisScreen: Screen, x: any, y: any) => {
+        if (thisScreen.rect.left <= x &&
+            thisScreen.rect.right >= x &&
+            thisScreen.rect.top <= y &&
+            thisScreen.rect.bottom >= y) {
+            /*
+            thisScreen.children.forEach(screenChild => {
+                if (findChildInBound(screenChild, x, y)) {
+                    found = true;
+                }
+            });
+            */
+           let found = false;
+           for (let i = 0; i < thisScreen.children.length; i++) {
+               if (findChildInBound(thisScreen.children[i], x, y)) {
+                   found = true;
+                   break;
+               }
+           }
+            if (!found) {
+                console.log(thisScreen.className);
+                console.log(`${x} ${y} ${thisScreen.rect.left} ${thisScreen.rect.right} ${thisScreen.rect.top} ${thisScreen.rect.bottom}`);
+                setRectLeft(thisScreen.rect.left);
+                setRectRight((thisScreen.screenWidth - thisScreen.rect.right));
+                setRectTop(thisScreen.rect.top);
+                setRectBottom((thisScreen.screenHeight - thisScreen.rect.bottom));
+                return true;
+            }
+        }
+    }
 
-    return (
-        <div style={{position: "relative", justifyContent:'center'}} >
-            
-            <img onClick={onMouseClick} src={props.screenCap.screenshot} style={{width: 300,  zIndex: 1}} />
-            <div style={{position: "absolute", zIndex: 2, width: rectangleWidth, height: rectangleHeight, left: rectX, top: rectY, border:"solid black 5px"}}></div>
-        </div>
-    );
-
+    if (!hasBeenClicked) {
+        return (
+            <div onClick={onMouseClick} style={{position: "relative", justifyContent:'center'}} >
+                <img src={props.screenCap.screenshot} style={{width: 300,  zIndex: 0}}/>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div onClick={onMouseClick} style={{position: "relative", justifyContent:'center'}} >
+                <img src={props.screenCap.screenshot} style={{width: 300,  zIndex: 0}}/>
+                <div style={{position: "absolute", zIndex: 2, left: rectLeft, right: rectRight, top: rectTop, bottom: rectBottom, border:"solid black 5px"}}></div>
+            </div>
+        );
+    }
 }
+
 export default ScreenCaptureView;

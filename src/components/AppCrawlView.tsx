@@ -16,21 +16,11 @@ export const AppCrawlView: FunctionComponent<AppCrawlViewProps> = (props) => {
     const screens: ScreenCaptureStore[] = props.appCrawl.screenCaptures; //CHANGE
 
     const handleClickBack = () => {
-        if (onIndex === 0) {
-            setIndex(screens.length - 1);
-        }
-        else {
-            setIndex(onIndex - 1);
-        }
+        setIndex((onIndex - 1 + screens.length) % screens.length);
     }
 
     const handleClickForward = () => {
-        if (onIndex === screens.length - 1) {
-            setIndex(0);
-        }
-        else {
-            setIndex(onIndex + 1);
-        }
+        setIndex((onIndex + 1) % screens.length);
     }
     
     return (
@@ -46,7 +36,6 @@ export const AppCrawlView: FunctionComponent<AppCrawlViewProps> = (props) => {
                 </div>
 
                 <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-
                     <ScreenCaptureView screenCap={screens[onIndex]} />
                 </div>
             </div>

@@ -3,22 +3,23 @@ import * as React from 'react';
 import { useState } from 'react';
 import { AppCrawlStore } from '../stores/AppCrawlStore';
 import { AppCrawlView } from '../components/AppCrawlView';
+import { FunctionComponent } from 'react';
 
 import { Button } from "@material-ui/core";
 
-export const AppButton = () => {
-    const [hasBeenClicked, setClick] = useState(false);
+interface AppButtonProps {
+    width: number,
+    height: number
+}
+
+export const AppButton: FunctionComponent<AppButtonProps> = () => {
+    const [isClicked, setClick] = useState(false);
+
     const handleClick = () => {
-        if (hasBeenClicked) {
-            setClick(false);
-        }
-        else {
-            setClick(true);
-        }
-        
+        setClick(!isClicked);
     }
 
-    if (!hasBeenClicked) {
+    if (!isClicked) {
         return (
             <Button onClick={handleClick}>GrubHub</Button>
         )
@@ -32,7 +33,6 @@ export const AppButton = () => {
             </div>
         )
     }
-    
 }
 
 export default AppButton;

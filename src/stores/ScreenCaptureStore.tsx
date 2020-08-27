@@ -1,35 +1,18 @@
-//import { Screen } from '../types/Screen';
+import { Screen } from '../types/Screen';
 
-export class ScreenCaptureStore  {
+export class ScreenCaptureStore {
     imagePath: string;
     viewHierarchyPath: string;
-    //screen: Screen;
-    view: any;
-    screenshot: any;
+    view: Screen; // view holds json information
+    screenshot: any; // screenshot holds picture information
 
-    constructor(datePath: string, id: string, view: any, screenshot: any) { // datePath should be of format 'YYYY.MM', second 2 params are for hardcoded imports
+    // datePath should be of format 'YYYY.MM'
+    constructor(datePath: string, id: string, view: any, screenshot: any) {
         this.imagePath = `../assets/${datePath}/screenshots/${id}.png`;
         this.viewHierarchyPath = `../assets/${datePath}/views/${id}.json`;
-        //this.screen = this.getJSON(this.viewHierarchyPath);
         this.view = view;
         this.screenshot = screenshot;
     }
-
-
-// imports instead of file systems
-    //getJSON(path: string) {
-        // TODO: figure out how to import path of json file dynamically
-        //let screenFile = import(path);
-        //let view: Screen;
-
-        //return view;
-    //}
-/*
-    getJSON(view: any) {
-        
-    }
-    */
 }
-
 
 export default ScreenCaptureStore;

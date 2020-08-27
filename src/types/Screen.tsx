@@ -6,12 +6,12 @@ export interface Screen {
         top: number;
         left: number;
     }
-    children?: Screen;
+    children: Screen[];
 
     className: string;
-    contentDesc?: string;
-    hintText?: string;
-    inheritedLabel?: string;
+    contentDesc: string;
+    hintText: string;
+    inheritedLabel: string;
 
     isAccessibilityFocused: boolean;
     isCheckable: boolean;
@@ -33,7 +33,7 @@ export interface Screen {
     isShowingHintText: boolean;
     isVisibleToUser: boolean;
     packageName: string;
-    paneTitle?: string;
+    paneTitle: string;
 
     rect: {
         bottom: number;
@@ -42,11 +42,11 @@ export interface Screen {
         top: number;
     }
 
-    resourceId?: string;
+    resourceId: string;
     screenHeight: number;
     screenWidth: number;
-    text?: string;
-    toolTipText?: string;
+    text: string;
+    toolTipText: string;
 }
 
 export default Screen;
