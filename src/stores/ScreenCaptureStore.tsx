@@ -1,8 +1,10 @@
 import { Screen } from '../types/Screen';
 
 export class ScreenCaptureStore {
+    // imagePath and viewHierarchyPath are not used for the imported assets approach
     imagePath: string;
     viewHierarchyPath: string;
+
     view: Screen; // view holds json information
     screenshot: any; // screenshot holds picture information
 

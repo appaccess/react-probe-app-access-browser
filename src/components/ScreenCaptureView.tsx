@@ -20,12 +20,9 @@ export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (pro
 
         let x = e.nativeEvent.offsetX;
         let y = e.nativeEvent.offsetY;
-        //let x = e.screenX;
-        //let y = e.screenY;
 
         // TODO: look into json data to see if lowest element in hierarchy for the bound and set top, left, width, height accordingly (or top, bottom, left, right)
-        findChildInBound(props.screenCap.view, x, y);
-
+        findChildInBound(props.screenCap.view, x, y); // note: this method is not working-- coordinates system of e and div must be resolved
     }
 
     const findChildInBound = (thisScreen: Screen, x: any, y: any) => {
@@ -33,20 +30,14 @@ export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (pro
             thisScreen.rect.right >= x &&
             thisScreen.rect.top <= y &&
             thisScreen.rect.bottom >= y) {
-            /*
-            thisScreen.children.forEach(screenChild => {
-                if (findChildInBound(screenChild, x, y)) {
+
+            let found = false;
+            for (let i = 0; i < thisScreen.children.length; i++) {
+                if (findChildInBound(thisScreen.children[i], x, y)) {
                     found = true;
+                    break;
                 }
-            });
-            */
-           let found = false;
-           for (let i = 0; i < thisScreen.children.length; i++) {
-               if (findChildInBound(thisScreen.children[i], x, y)) {
-                   found = true;
-                   break;
-               }
-           }
+            }
             if (!found) {
                 console.log(thisScreen.className);
                 console.log(`${x} ${y} ${thisScreen.rect.left} ${thisScreen.rect.right} ${thisScreen.rect.top} ${thisScreen.rect.bottom}`);
@@ -59,21 +50,12 @@ export const ScreenCaptureView: FunctionComponent<ScreenCaptureViewProps> = (pro
         }
     }
 
-    if (!hasBeenClicked) {
-        return (
-            <div onClick={onMouseClick} style={{position: "relative", justifyContent:'center'}} >
-                <img src={props.screenCap.screenshot} style={{width: 300,  zIndex: 0}}/>
-            </div>
-        );
-    }
-    else {
-        return (
-            <div onClick={onMouseClick} style={{position: "relative", justifyContent:'center'}} >
-                <img src={props.screenCap.screenshot} style={{width: 300,  zIndex: 0}}/>
-                <div style={{position: "absolute", zIndex: 2, left: rectLeft, right: rectRight, top: rectTop, bottom: rectBottom, border:"solid black 5px"}}></div>
-            </div>
-        );
-    }
+    return (
+        <div onClick={onMouseClick} style={{position: "relative", justifyContent:'center'}} >
+            <img src={props.screenCap.screenshot} style={{width: 300,  zIndex: 0}}/>
+            {hasBeenClicked && <div style={{position: "absolute", zIndex: 2, left: rectLeft, right: rectRight, top: rectTop, bottom: rectBottom, border:"solid black 5px"}}></div>}
+        </div>
+    );
 }
 
 export default ScreenCaptureView;

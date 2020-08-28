@@ -3,7 +3,7 @@ import { v1, v2, v3, v4, v5, v6, v7, v8, v9, v10,
          s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 } from '../common/ImportedAssets';
 
 export class AppCrawlStore {
-    date: string;
+    date: string; // not currently used, anticipated use is for when multiple crawls at different dates are displayed
     screenCaptures: ScreenCaptureStore[];
     // TODO: graph that relates screens 
     // TODO: version of app

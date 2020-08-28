@@ -16,6 +16,7 @@ export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
         this.dateRange = dateRange;
         this.crawls = [];
 
+        // this for loop has not been tested-- use is anticipated for when multiple crawls at different dates are displayed
         for (let date of dateRange) {
             this.crawls.push(new AppCrawlStore(date));
         }
