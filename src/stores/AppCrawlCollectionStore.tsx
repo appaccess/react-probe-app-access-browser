@@ -16,25 +16,11 @@ export class AppCrawlCollectionStoreImpl implements AppCrawlCollectionStore {
         this.dateRange = dateRange;
         this.crawls = [];
 
+        // this for loop has not been tested-- use is anticipated for when multiple crawls at different dates are displayed
         for (let date of dateRange) {
             this.crawls.push(new AppCrawlStore(date));
         }
     }
 }
 
-let INSTANCE: AppCrawlCollectionStore | null = null;
-
-export function createAppCrawlCollectionStore(appName: string, dateRange: string[]) : AppCrawlCollectionStore {
-    if (INSTANCE) {
-        throw new Error('There can only be one AppCrawlCollectionStore.');
-    }
-    INSTANCE = new AppCrawlCollectionStoreImpl(appName, dateRange);
-    return getAppCrawlCollectionStore();
-}
-
-export function getAppCrawlCollectionStore() {
-    if (INSTANCE === null) {
-        throw new Error('AppCrawlCollectionStore not created');
-    }
-    return INSTANCE;
-}
+export default AppCrawlCollectionStoreImpl;
